@@ -17,6 +17,19 @@ class TodoList extends Component<any, ITodoList> {
         };
     }
 
+    componentDidMount() {
+        fetch(`/todos`)
+            .then((res) => res.json())
+            .then((data) => {
+                this.setState({
+                    todos: data,
+                });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     toggleComplete = (id: string): void => {
         const updatedTodos: ITodoItem[] = this.state.todos.map((todo) => {
             if (todo.id === id) {
@@ -29,7 +42,7 @@ class TodoList extends Component<any, ITodoList> {
         });
     };
 
-    renderTodoItem = () => {
+    renderTodoList = () => {
         return this.state.todos.map((todo) => (
             <TodoItem
                 toggleComplete={this.toggleComplete}
@@ -51,7 +64,7 @@ class TodoList extends Component<any, ITodoList> {
             <div className='TodoList'>
                 <h1>Todo List</h1>
                 <NewTodoForm addTodoItem={this.addTodoItem} />
-                <ul>{this.renderTodoItem()}</ul>
+                <ul>{this.renderTodoList()}</ul>
             </div>
         );
     }
