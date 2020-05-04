@@ -20,7 +20,7 @@
         "uuid": "^7.0.3"
     },
     "scripts": {
-        "start": "nodemon server.js",
+        "start": "react-scripts build && nodemon server.js",
         "build": "react-scripts build",
         "test": "react-scripts test",
         "eject": "react-scripts eject"
